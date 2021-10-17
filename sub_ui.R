@@ -51,9 +51,6 @@ p2_ui = fluidPage(
       uiOutput("code2")
     )),
   box(
-    title = 'R Code Practice',
-    solidHeader = TRUE,
-    status = 'primary',
     width = 5,
     height = 800,
     htmlOutput("html"))
@@ -163,7 +160,7 @@ p3_2_ui = fluidPage(
   )
 )
 
-p4_ui = fluidPage(
+p4_4_ui = fluidPage(
   fluidRow(
     box(
       width = 12,
@@ -204,7 +201,8 @@ p4_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        textOutput("velocityFun"),
+        height = 100,
+        verbatimTextOutput("velocityFun"),
         plotOutput("Vplot")
       )
     ),
@@ -212,8 +210,276 @@ p4_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        textOutput("accelerationFun"),
+        height = 100,
+        verbatimTextOutput("accelerationFun"),
         plotOutput("Aplot")
+      )
+    )
+  ),
+  uiOutput('html4')
+)
+
+p4_2_ui=fluidPage(
+  fluidRow(
+  box(title = 'Example1',
+      width = 7,
+      textOutput('ex40201'),
+  br(),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        actionButton('ex40201_1set','Solution'),
+        verbatimTextOutput('good01'),
+        plotOutput('goodplot01')
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        actionButton('ex40201_2set','Solution'),
+        verbatimTextOutput('good02'),
+        plotOutput('goodplot02')
+      )
+    )
+  )),
+  box(
+    width = 5,
+    height = 660,
+    htmlOutput('html402'))
+),
+  fluidRow(
+    box(title = 'Example2',
+        width = 7,
+        textOutput('ex40202'),
+        br(),
+        actionButton('ex40202_1set','Solution'),
+        br(),
+        verbatimTextOutput('good03')),
+    box(
+      width = 5,
+      height = 650,
+      htmlOutput('html403')
+  )))
+
+p4_3_ui = fluidPage(
+  fluidRow(
+    box(
+      width = 12,
+      title = 'Question 1',
+      verbatimTextOutput("peggy_question1"),
+    )
+  ),
+  fluidRow(
+    box(
+      width = 12,
+      br(),
+      verbatimTextOutput("peggy_Fun1"),
+      br(),
+      actionButton("peggy_set1","Plot"),
+      br(),
+      plotOutput("peggy_plot1")
+    )
+  ),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_que11"),
+        actionButton("peggy_set11","Solution")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_que12"),
+        actionButton("peggy_set12","Solution")
+      )
+    )
+  ),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_Fun11"),
+        htmlOutput("peggy_html11")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_Fun12"),
+        htmlOutput("peggy_html12")
+      )
+    )
+  ),
+  fluidRow(
+    column(
+      width = 12,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_que13"),
+        actionButton("peggy_set13","Solution")
+      )
+    ),
+    column(
+      width = 12,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_Fun13"),
+        htmlOutput("peggy_html13")
+      )
+    )
+  ),
+  fluidRow(
+    box(
+      width = 12,
+      title = 'Question 2',
+      verbatimTextOutput("peggy_question2"),
+    )
+  ),
+  fluidRow(
+    box(
+      width = 12,
+      br(),
+      verbatimTextOutput("peggy_Fun2"),
+      br(),
+      actionButton("peggy_set2","Plot"),
+      br(),
+      plotOutput("peggy_plot2")
+    )
+  ),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_que21"),
+        actionButton("peggy_set21","Solution")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_que22"),
+        actionButton("peggy_set22","Solution")
+      )
+    )
+  ),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_Fun21"),
+        htmlOutput("peggy_html21")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        verbatimTextOutput("peggy_Fun22"),
+        htmlOutput("peggy_html22")
+      )
+    )
+  )
+)
+
+p4_8_ui = fluidPage(
+  fluidRow(
+    box(
+      width = 6,
+      height = 680,
+      textOutput("ch08example1_question"),
+      br(),
+      actionButton("areaplot","Plot"),
+      actionButton("sol01","Solution"),
+      uiOutput("aplot"),
+      br(),
+      uiOutput("sol1plot")
+      
+    ),
+  box(
+    title = 'R Code Practice',
+    solidHeader = TRUE,
+    status = 'primary',
+    width = 6,
+    height = 680,
+    htmlOutput("html2"))),
+  fluidRow(
+     box(
+       width = 6,
+      box(
+        width = 500,
+        textOutput("ch08example2_question"),
+        actionButton("sol02","Solution")
+      )
+    ,
+      box(
+        width = 500,
+        uiOutput("sol02plot")
+      )),
+  box(
+    title = 'R Code Practice',
+    solidHeader = TRUE,
+    status = 'primary',
+    width = 6,
+    height = 650,
+    htmlOutput("html3")))
+  
+)
+
+p4_10_ui=fluidPage(
+  fluidRow(
+    box(
+      width = 12,
+      textOutput("example10_question"),
+    ),
+    box(
+      width=12,
+      htmlOutput("html0003"))
+  ),
+  
+  
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        textOutput("Q001"),
+        actionButton("V001","Solution")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        textOutput("Q002"),
+        actionButton("V002","Solution")
+      )
+    )
+  ),
+  fluidRow(
+    column(
+      width = 6,
+      box(
+        width = 200,
+        textOutput("A001")
+      )
+    ),
+    column(
+      width = 6,
+      box(
+        width = 200,
+        textOutput("A002")
       )
     )
   )

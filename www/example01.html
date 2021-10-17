@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>R Code Practice</title>
+  <link rel='shortcut icon' type='image/x-icon' href='https://www.datacamp.com/assets/favicon.ico'/>
+  <style>
+    .exercise {
+      margin: 0px;
+    }
+
+    [data-datacamp-exercise] {
+        visibility: hidden;
+      }
+  </style>
+
+  <script async src="https://cdn.datacamp.com/dcl-react-dev.js.gz"></script>
+</head>
+<body>
+  <div class="exercise">
+    <div class="title">
+      <h2>R Code Practice</h2>
+    </div>
+    <div data-datacamp-exercise data-lang="r" data-height="500">
+      <code data-type="pre-exercise-code"># no pec</code>
+      <code data-type="sample-code">
+        require(mosaic)
+        ace = makeFun(35+0.45*x ~ x)
+        acme = makeFun(30+0.5*x ~ x)
+        plotFun(ace(x=x) ~ x, x.lim=range(0,10))
+        plotFun(acme(x=x) ~ x, x.lim=range(0,10))
+      </code>
+      <code data-type="solution">
+      </code>
+    </div>
+  </div>
+</body>
+</html>

@@ -15,10 +15,10 @@
         <div data-datacamp-exercise data-lang="r" data-height="500" id="r-exercise" style="width: 100%; height: 200px;">
           <code data-type="pre-exercise-code"></code>
           <code data-type="sample-code">
-        require(numDeriv)
-        d <- function(x) 15-11*exp(-0.1*x)
-        grad(d,0)
-        grad(d,12)
+		a<-expression(2*x^3+4*x^2-5*x+1000)
+		D(a,'x')
+		x<-2
+		eval(D(a,'x'))
           </code>
           <code data-type="solution">
           </code>

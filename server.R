@@ -42,7 +42,7 @@ shinyServer(function(input, output, session){
         tags$iframe(style="height:750px; width:100%", src="R-code2.pdf")
     })
     output$html = renderUI({
-        tags$iframe(width="100%", height="750", src='example.html',seamless=TRUE)
+        tags$iframe(width="100%", height="750", src='example001.html',seamless=TRUE)
     })
     #p3
     observeEvent(input$set1,{
@@ -188,8 +188,117 @@ shinyServer(function(input, output, session){
         })
     })
     
+    #p4-2
+    output$ex40201 = renderText({'Ace Truck leases its 10-ft box truck at $35/day and $0.45/mi, 
+        whereas Acme Truck leases a similar truck at $30/day and $0.50/mi. Find the daily cost 
+        of leasing from each company as a function of x number of miles driven.'})
+    observeEvent(input$ex40201_1set,{
+        output$good01=renderText({
+            'f(Ace)=35+0.45x'
+        })
+        output$goodplot01=renderPlot({
+            mgf('35+0.45*x', from=0, to=20)
+        })
+    })
+    observeEvent(input$ex40201_2set,{
+        output$good02=renderText({
+            'f(Acme)=30+0.5x'
+        })
+        output$goodplot02=renderPlot({
+            mgf('30+0.5*x', from=0, to=20)
+        })
+    })
+    output$html402 = renderUI({
+        tags$iframe(width="100%", height="600", src='example01.html',seamless=TRUE)
+    })
+    output$ex40202 = renderText({' For the supply equation p=x^3+2x^2+3 where x is the quantity 
+    supplied in units of a thousand and p is the unit price in dollars, determine the price at 
+    which the supplier will make 3 units of the commodity available in the market.'})
     
-    #p4
+    observeEvent(input$ex40202_1set,{
+        output$good03=renderText({'p(x=3)=3^3+2×3^2+3=48'
+        })
+    })
+    output$html403 = renderUI({
+        tags$iframe(width="100%", height="600", src='example02.html',seamless=TRUE)
+    })
+    
+    #4-3
+    output$peggy_question1 = renderText({
+        "A certain species of turtle faces extinction because dealers collect truckloads of turtle eggs to be sold as aphrodisiacs.\nAfter severe conservation measures are implemented, it is hoped that the turtle population will grow according to the rule:\nN(t) = 2t^3 + 4t^2 - 5t + 1000   0<t<10, where N(t) denotes the population at the end of year t."})
+    output$peggy_que11 = renderText({"(a) Find the rate of growth of the turtle population when t=2."})
+    output$peggy_que12 = renderText({
+        "(b) Find the rate of growth of the turtle population when t=4."})
+    output$peggy_que13 = renderText({
+        "(c) What will be the population 10 yr after the conservation measures are implemented?"})
+    output$peggy_Fun1 = renderText({"N(t) = 2t^3 + 4t^2 - 5t + 1000"})
+    observeEvent(input$peggy_set1,{
+        output$peggy_plot1 = renderPlot({
+            mgf('2*x^3+4*x^2-5*x+1000', from=0, to=10)
+        })})
+    observeEvent(input$peggy_set11,{
+        output$peggy_Fun11 = renderText({
+            "For the rate of growth when t=2:
+            N'(2) = 6*2^2 + 8*2 - 5 = 35"
+        })
+        output$peggy_html11 = renderUI({
+            tags$iframe(width="100%", height="360", src='code11.html',seamless=TRUE)
+        })
+    })
+    
+    observeEvent(input$peggy_set12,{
+        output$peggy_Fun12 = renderText({
+            "For the rate of growth when t=4:
+            N'(4) = 6*4^2 + 8*4 - 5 = 123"
+        })
+        output$peggy_html12 = renderUI({
+            tags$iframe(width="100%", height="360", src='code12.html',seamless=TRUE)
+        })
+    })
+    
+    observeEvent(input$peggy_set13,{
+        output$peggy_Fun13 = renderText({
+            "For the population 10 yr after the conservation measures:
+            N(10) = 2*10^3 + 4*10^2 - 5t + 1000 = 3350"
+        })
+        output$peggy_html13 = renderUI({
+            tags$iframe(width="100%", height="360", src='code13.html',seamless=TRUE)
+        })
+    })
+    
+    ### 4-3Q2 ###
+    output$peggy_question2 = renderText({
+        "During testing of a certain brand of air purifier, the amount of smoke remaining t min after the start of the test was\nA(t) = -0.00006t^5 + 0.00468t^4 - 0.1316t^3 + 1.915t^2 - 17.63t +100 percent of the original amount."})
+    output$peggy_que21 = renderText({"(a) Find the percentage per minute when t=3 ( A'(3) )."})
+    output$peggy_que22 = renderText({
+        "(b) Find the percentage per minute in the second power when t=3 ( A''(3) )."})
+    output$peggy_Fun2 = renderText({"A(t) = -0.00006t^5 + 0.00468t^4 - 0.1316t^3 + 1.915t^2 - 17.63t +100"})
+    observeEvent(input$peggy_set2,{
+        output$peggy_plot2 = renderPlot({
+            mgf('-0.00006*x^5+0.00468*x^4-0.1316*x^3+1.915*x^2-17.63*x+100', from=0, to=10)
+        })
+    })
+    observeEvent(input$peggy_set21,{
+        output$peggy_Fun21 = renderText({
+            "For the percentage per minute when t=3:
+            A'(3) = -0.003*3^4 + 0.01872*3^3 - 0.2632*3^2 + 3.83*3 -17.63 = -9.212"
+        })
+        output$peggy_html21 = renderUI({
+            tags$iframe(width="100%", height="360", src='code21.html',seamless=TRUE)
+        })
+    })
+    
+    observeEvent(input$peggy_set22,{
+        output$peggy_Fun22 = renderText({
+            "For the percentage per minute in the second power when t=3:
+            A''(3) = -0.012*3^3 + 0.3744*3^2 - 0.5264*3 + 3.83 = 1.934"
+        })
+        output$peggy_html22 = renderUI({
+            tags$iframe(width="100%", height="360", src='code22.html',seamless=TRUE)
+        })
+    })
+    
+    #p4-4
     #改成215 APPLIED EXAMPLE 4
     output$example1_question = renderText({"After t weeks of practice a pole vaulter can vault feet.Find the rate of change of the athlete's jumps after"})
     output$velocity = renderText({"(a) 0 week (at the beginning of training)"})
@@ -201,16 +310,68 @@ shinyServer(function(input, output, session){
     })})
     observeEvent(input$Vset,{
         output$velocityFun = renderText({
-            "For the rate of change after 0 weeks:
-            H'(0) = 1.1e^(-0.1(0)) = 1.1e^0 = 1.1"
+            "H'(x)=1.1e^(-0.1(x))\n=>For the rate of change after 0 weeks:\nH'(0) = 1.1e^(-0.1(0)) = 1.1e^0 = 1.1"
         })})
 
     observeEvent(input$Aset,{
         output$accelerationFun = renderText({
-            "After 12 weeks:
-            H'(12) = 1.1e^(-0.1(12)) = 1.1e^(-1.2) = 1.1(0.30) = 0.33"
+            "H'(x)=1.1e^(-0.1(x))\n=>After 12 weeks:\nH'(12) = 1.1e^(-0.1(12)) = 1.1e^(-1.2) = 1.1(0.30) = 0.33"
         })
     })
+    output$html4 = renderUI({
+        tags$iframe(width="100%", height="600", src='08151.html',seamless=TRUE)
+    })
+    
+    #p4-8
+    output$ch08example1_question = renderText({"Find the area under one arch of y =sin t"})
+    output$ch08example2_question = renderText({"Differentiate f(t)=sint÷t"})
+    observeEvent(input$areaplot,{
+        output$aplot = renderUI({
+            tags$iframe(width = "500", height = "450", src='areaplot.png')
+        })})
+    observeEvent(input$sol01,{
+        output$sol1plot = renderUI({
+            tags$iframe(width = "500", height = "50", src='ch8sol01.png')
+        })})
+    output$html2 = renderUI({
+        tags$iframe(width="100%", height="600", src='ch08html01.html',seamless=TRUE)
+    })
+    observeEvent(input$sol02,{
+        output$sol02plot = renderUI({
+            tags$iframe(width = "500", height = "100", src='ch8sol02.png')
+        })})
+    output$html3 = renderUI({
+        tags$iframe(width="100%", height="600", src='ch08html02.html',seamless=TRUE)
+    })
+    
+    #4-10
+    output$example10_question = renderText({"ANSWER THE QUESTION
+ "})
+    output$Q001 = renderText({"Sum the first 4 terms of 10, 30, 90, 270, 810, 2430, ..
+The values of a, r and n are:
+
+a = 10 (the first term)
+r = 3 (the common ratio)
+n = 4 (we want to sum the first 4 terms)
+ "})
+    output$Q002 = renderText({"Sam deposits $50 on the first of each month into an account which 
+    arns 0.5% interest each month. To the nearest dollar, how much is in the account right after 
+    Sam makes his last deposit on the first day of the fifth year (the 49th month).
+
+The deposits that Sam make and the interest earned on each deposit generate a geometric series
+"})
+    observeEvent(input$V001,{
+        output$A001 = renderText({
+            "(4-1)∑(k=0) 10(3)^k=400"
+        })})
+    observeEvent(input$V002,{
+        output$A002 = renderText({
+            "Evaluate 8∑(n=3)2(-3)^(n-1)"
+        })})
+    output$html0003 <- renderUI({
+        tags$iframe(src = "example41001.html", width = "100%", height = "600", seamless=TRUE)
+    })
+    
 
 
     #p5
