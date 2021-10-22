@@ -4,6 +4,8 @@ require(scales)
 require(gridExtra)
 require(devtools)
 require(mosaic)
+require(devtools)
+require(shinyforms)
 source("mgf.R")
 
 shinyServer(function(input, output, session){
@@ -322,6 +324,61 @@ shinyServer(function(input, output, session){
         tags$iframe(width="100%", height="600", src='08151.html',seamless=TRUE)
     })
     
+    #p4-5
+    output$htmln2 = renderUI({
+        tags$iframe(width="90%", height="480", src='examplen5.html',seamless=TRUE)
+    })
+    
+    #####課本習題#####
+    output$example5_question = renderText({"Find each of the following Indefinite integrals "})
+    output$quiz1 = renderText({"∫(3x-2)dx"})
+    output$quiz2 = renderText({"∫(1/x)dx"})
+    output$quiz3 = renderText({"∫(e+1)dx"})
+    observeEvent(input$setn1,{
+        output$quiz1ch5 = renderText({
+            "The answer is :
+           3*X^2/2-2X + C
+          =3X^2/2-2X + C"
+        })})
+    
+    observeEvent(input$setn2,{
+        output$quiz2ch5 = renderText({
+            "The answer is :
+         ∫1/xdx = ln x + c =
+            ln x + C"
+        })})
+    
+    observeEvent(input$setn3,{
+        output$quiz3ch5 = renderText({
+            "The answer is:
+        ∫kdx = kx+c =
+        ∫(e+1)dx = (e+1)x + C"
+        })
+    })
+    
+    #p4-6
+    output$ddd1_question = renderText({"Evaluate x e^xdx"})
+    output$ddd2_question = renderText({"Evaluate xlnx dx"})
+    observeEvent(input$dddd,{
+        output$daplot = renderUI({
+            tags$iframe(width = "500", height = "450", src='ex6-1-1.png')
+        })})
+    observeEvent(input$ddd01,{
+        output$dsol1plot = renderUI({
+            tags$iframe(width = "400", height = "150", src='ex6-1-a.png')
+        })})
+    output$htmld2 = renderUI({
+        tags$iframe(width="100%", height="600", src='fabian6html01.html',seamless=TRUE)
+    })
+    observeEvent(input$ddd02,{
+        output$ddd02plot = renderUI({
+            tags$iframe(width = "400", height = "150", src='ex6-1-a.png')
+        })})
+    output$htmld3 = renderUI({
+        tags$iframe(width="100%", height="600", src='fabian6html02.html',seamless=TRUE)
+    })
+    
+    
     #p4-8
     output$ch08example1_question = renderText({"Find the area under one arch of y =sin t"})
     output$ch08example2_question = renderText({"Differentiate f(t)=sint÷t"})
@@ -435,4 +492,192 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
             paste(input$rb2)
         })
     })
+    
+    ### p6 ###
+    output$choice201= renderUI({
+        tags$iframe(width = "630", height = "360", src='choice201.png')
+    })
+    
+    output$choice202= renderUI({
+        tags$iframe(width = "630", height = "420", src='choice202.png')
+    })
+    
+    output$choice203= renderUI({
+        tags$iframe(width = "630", height = "210", src='choice203.png')
+    })
+    
+    output$dddd301= renderUI({
+        tags$iframe(width = "550", height = "250", src='dd1.png')
+    })
+    
+    output$dddd302= renderUI({
+        tags$iframe(width = "550", height = "250", src='dd2.png')
+    })
+    
+    output$dddd303= renderUI({
+        tags$iframe(width = "550", height = "250", src='dd3.png')
+    })
+    
+    output$dddd304= renderUI({
+        tags$iframe(width = "550", height = "250", src='dd4.png')
+    })
+    
+    output$J401= renderUI({
+        tags$iframe(width = "550", height = "250", src='J401.png')
+    })
+    
+    output$J402= renderUI({
+        tags$iframe(width = "550", height = "250", src='J402.png')
+    })
+    
+    output$J403= renderUI({
+        tags$iframe(width = "550", height = "250", src='J403.png')
+    })
+    
+    output$J404= renderUI({
+        tags$iframe(width = "550", height = "250", src='J404.png')
+    })
+    
+    p_f201=function(q201){
+        if(q201=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f202=function(q202){
+        if(q202=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
+    p_f203=function(q203){
+        if(q203=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
+    d_f301=function(q601){
+        if(q601=='d'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    d_f302=function(q602){
+        if(q602=='b'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    d_f303=function(q603){
+        if(q603=='e'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    d_f304=function(q604){
+        if(q604=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    d_f401=function(q401){
+        if(q401=='b'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    d_f402=function(q402){
+        if(q402=='b'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    d_f403=function(q403){
+        if(q403=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    d_f404=function(q404){
+        if(q404=='e'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    observeEvent(input$p_do,{
+        showModal(modalDialog(
+            title = "Text",
+            ui<-fluidPage(
+                fluidRow(
+                    column(
+                        width = 6,
+                        box(
+                            width = 200,
+                            title='Correct Answer',
+                            verbatimTextOutput('peggy_show01')
+                        )
+                    ),
+                    column(
+                        width = 6,
+                        box(
+                            width = 200,
+                            title='Your Answer',
+                            verbatimTextOutput("p_text02")
+                        )
+                    )
+                )),
+            easyClose = TRUE,
+            footer = modalButton('Close')
+        ))
+    })
+    
+    output$peggy_show01 = renderText({
+        '1  a\n2  a\n3  c\n4  d\n5  b\n6  e\n7  c\n8  b\n9  b\n10  c\n11  e'
+    })
+    output$p_text02<-renderText({
+        c('',input$p_201,'\n',
+          input$p_202,'\n',
+          input$p_203,'\n',
+          input$d_301,'\n',
+          input$d_302,'\n',
+          input$d_303,'\n',
+          input$d_304,'\n',
+          input$d_401,'\n',
+          input$d_402,'\n',
+          input$d_403,'\n',
+          input$d_404,'\n')
+    })
 })
+
