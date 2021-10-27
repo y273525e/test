@@ -538,6 +538,62 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
         tags$iframe(width = "550", height = "250", src='J404.png')
     })
     
+    output$choice301= renderUI({
+        tags$iframe(width = "450", height = "450", src='choice301.png')
+    })
+    
+    output$choice302= renderUI({
+        tags$iframe(width = "450", height = "620", src='choice302.png')
+    })
+    
+    output$choice303= renderUI({
+        tags$iframe(width = "100%", height = "500", src='choice303.png')
+    })
+    
+    output$choice304= renderUI({
+        tags$iframe(width = "650", height = "270", src='choice304.png')
+    })
+    
+    output$choice101= renderUI({
+        tags$iframe(width = "750", height = "550", src='choice101.png')
+    })
+    
+    output$choice102= renderUI({
+        tags$iframe(width = "750", height = "550", src='choice102.png')
+    })
+    output$choice103= renderUI({
+        tags$iframe(width = "750", height = "600", src='choice103.png')
+    })
+    output$choice104= renderUI({
+        tags$iframe(width = "750", height = "600", src='choice104.png')
+    })
+    
+    output$choice501= renderUI({
+        tags$iframe(width = "450", height = "650", src='choice501.png')
+    })
+    
+    output$choice502= renderUI({
+        tags$iframe(width = "670", height = "550", src='choice502.png')
+    })
+    
+    output$choice503= renderUI({
+        tags$iframe(width = "390", height = "550", src='choice503.png')
+    })
+    
+    output$choice801= renderUI({
+        tags$iframe(width = "450", height = "300", src='choice801.png')
+    })
+    
+    output$choice802= renderUI({
+        tags$iframe(width = "450", height = "300", src='choice802.png')
+    })
+    output$choice803= renderUI({
+        tags$iframe(width = "450", height = "300", src='choice803.png')
+    })
+    output$choice804= renderUI({
+        tags$iframe(width = "450", height = "300", src='choice804.png')
+    })
+    
     p_f201=function(q201){
         if(q201=='a'){
             return('Correct')
@@ -635,6 +691,145 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
             return('Wrong')
         }
     }
+    p_f301=function(q301){
+        if(q301=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f302=function(q302){
+        if(q302=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f303=function(q303){
+        if(q303=='e'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f304=function(q304){
+        if(q304=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f101=function(q101){
+        if(q101=="c"){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f102=function(q102){
+        if(q102=="c"){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    p_f103=function(q103){
+        if(q103=="e"){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    p_f104=function(q104){
+        if(q104=="c"){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
+    p_f501=function(q501){
+        if(q501=='b'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f502=function(q502){
+        if(q502=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
+    p_f503=function(q503){
+        if(q502=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
+    p_f801=function(q801){
+        if(q801=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+    }
+    
+    p_f802=function(q802){
+        if(q802=='d'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    p_f803=function(q803){
+        if(q803=='a'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    p_f804=function(q804){
+        if(q804=='c'){
+            return('Correct')
+        }
+        else{
+            return('Wrong')
+        }
+        
+    }
+    
     
     observeEvent(input$p_do,{
         showModal(modalDialog(
@@ -664,7 +859,7 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
     })
     
     output$peggy_show01 = renderText({
-        '1  a\n2  a\n3  c\n4  d\n5  b\n6  e\n7  c\n8  b\n9  b\n10  c\n11  e'
+        '1  a\n2  a\n3  c\n4  d\n5  b\n6  e\n7  c\n8  b\n9  b\n10  c\n11  e\n12  c\n13  a\n14  e\n15  a\n16  c\n17  c\n18  e\n19  c\n20  b\n21  a\n22  c\n23  a\n24  d\n25  a\n26  c'
     })
     output$p_text02<-renderText({
         c('',input$p_201,'\n',
@@ -677,7 +872,22 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
           input$d_401,'\n',
           input$d_402,'\n',
           input$d_403,'\n',
-          input$d_404,'\n')
+          input$d_404,'\n',
+          input$p_301,'\n',
+          input$p_302,'\n',
+          input$p_303,'\n',
+          input$p_304,'\n',
+          input$p_101,'\n',
+          input$p_102,'\n',
+          input$p_103,'\n',
+          input$p_104,'\n',
+          input$p_501,'\n',
+          input$p_502,'\n',
+          input$p_503,'\n',
+          input$p_801,'\n',
+          input$p_802,'\n',
+          input$p_803,'\n',
+          input$p_804)
     })
 })
 

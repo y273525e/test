@@ -844,6 +844,213 @@ p6_2_ui=fluidPage(
                    inline = T,
                    selected = 0)
     ),
+    box(
+      width = 200,
+      title='Question 12',
+      status = 'primary',
+      uiOutput("choice301"),
+      br(),
+      radioButtons("p_301", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 13',
+      status = 'primary',
+      uiOutput("choice302"),
+      br(),
+      radioButtons("p_302", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 13',
+      status = 'primary',
+      uiOutput("choice303"),
+      br(),
+      radioButtons("p_303", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 14',
+      status = 'primary',
+      uiOutput("choice304"),
+      br(),
+      radioButtons("p_304", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 1',
+      uiOutput("choice101"),
+      br(),
+      radioButtons("p_101", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+      ),
+    box(
+      width = 200,
+      title='Question 2',
+      uiOutput("choice102"),
+      br(),
+      radioButtons("p_102", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 3',
+      uiOutput("choice103"),
+      br(),
+      radioButtons("p_103", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 4',
+      uiOutput("choice104"),
+      br(),
+      radioButtons("p_104", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 1',
+      uiOutput("choice501"),
+      br(),
+      radioButtons("p_501", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 2',
+      uiOutput("choice502"),
+      br(),
+      radioButtons("p_502", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 3',
+      uiOutput("choice503"),
+      br(),
+      radioButtons("p_503", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d','e'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+      ),
+    box(
+      width = 200,
+      title='Question 1',
+      uiOutput("choice801"),
+      br(),
+      radioButtons("p_801", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0
+      )
+    ),
+    box(
+      width = 200,
+      title='Question 2',
+      uiOutput("choice802"),
+      br(),
+      radioButtons("p_802", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c','d'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 3',
+      uiOutput("choice803"),
+      br(),
+      radioButtons("p_803", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
+    box(
+      width = 200,
+      title='Question 4',
+      uiOutput("choice804"),
+      br(),
+      radioButtons("p_804", "Select the CORRECT answer",
+                   choices = c(
+                     'a','b','c'
+                   ),
+                   width=1000,
+                   inline = T,
+                   selected = 0)
+    ),
     actionButton("p_do", "Submit"))
   
 )
