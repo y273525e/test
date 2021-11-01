@@ -5,9 +5,10 @@ account: calculu
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 5013659
-bundleId: 5197469
+bundleId: 5198555
 url: https://calculu.shinyapps.io/test/
-when: 1635749928.59039
-lastSyncTime: 1635749928.59041
+when: 1635778249.76564
+lastSyncTime: 1635778249.76567
 asMultiple: FALSE
 asStatic: FALSE
+ignoredFiles: log.R
