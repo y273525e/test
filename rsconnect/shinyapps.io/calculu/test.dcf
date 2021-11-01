@@ -1,0 +1,13 @@
+name: test
+title: test
+username:
+account: calculu
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 5013659
+bundleId: 5197469
+url: https://calculu.shinyapps.io/test/
+when: 1635749928.59039
+lastSyncTime: 1635749928.59041
+asMultiple: FALSE
+asStatic: FALSE

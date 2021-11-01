@@ -6,9 +6,101 @@ require(devtools)
 require(mosaic)
 require(devtools)
 require(shinyforms)
+library(rsconnect)
+#rsconnect::deployApp('path/to/your/app')
 source("mgf.R")
+source("sub_ui.R")
 
 shinyServer(function(input, output, session){
+    
+    login = FALSE
+    USER <- reactiveValues(login = login)
+    
+    observe({ 
+        if (USER$login == FALSE) {
+            if (!is.null(input$login)) {
+                if (input$login > 0) {
+                    Username <- isolate(input$userName)
+                    Password <- isolate(input$passwd)
+                    if(length(which(credentials$username_id==Username))==1) { 
+                        pasmatch  <- credentials["passod"][which(credentials$username_id==Username),]
+                        pasverify <- password_verify(pasmatch, Password)
+                        if(pasverify) {
+                            USER$login <- TRUE
+                        } else {
+                            shinyjs::toggle(id = "nomatch", anim = TRUE, time = 1, animType = "fade")
+                            shinyjs::delay(3000, shinyjs::toggle(id = "nomatch", anim = TRUE, time = 1, animType = "fade"))
+                        }
+                    } else {
+                        shinyjs::toggle(id = "nomatch", anim = TRUE, time = 1, animType = "fade")
+                        shinyjs::delay(3000, shinyjs::toggle(id = "nomatch", anim = TRUE, time = 1, animType = "fade"))
+                    }
+                } 
+            }
+        }    
+    })
+    
+    output$logoutbtn <- renderUI({
+        req(USER$login)
+        tags$li(a(icon("fa fa-sign-out"), "Logout", 
+                  href="javascript:window.location.reload(true)"),
+                class = "dropdown", 
+                style = "background-color: #eee !important; border: 0;
+                    font-weight: bold; margin:5px; padding: 10px;")
+    })
+    
+    output$sidebarpanel <- renderUI({
+        if (USER$login == TRUE ){ 
+            sidebarMenu(
+                menuItem("主題 : 微積分",tabName = "chapter1",
+                         menuItem("講義",tabName = "page1"),
+                         menuItem("R程式", tabName="page2"),
+                         menuItem("互動式R-Shiny數位教材",tabName = "contact",
+                                  menuItem('現金流量',tabName = 'page3'),
+                                  menuItem('含上下界積分',tabName = 'page3-1'),
+                                  menuItem('微分',tabName = 'page3-2')),
+                         menuItem("習題練習", tabName="page4",
+                                  menuItem('CH2',tabName='page4-2'),
+                                  menuItem('CH3',tabName='page4-3'),
+                                  menuItem('CH4',tabName='page4-4'),
+                                  menuItem('CH5',tabName='page4-5'),
+                                  menuItem('CH6',tabName='page4-6'),
+                                  menuItem('CH8',tabName='page4-8'),
+                                  menuItem('CH10',tabName='page4-10')),
+                         menuItem("科普應用", tabName="page5"),
+                         menuItem("測驗", tabName="page6",
+                                  menuItem('CH00',tabName='page6-00'),
+                                  menuItem('CH2',tabName='page6-2'))
+                )
+            )
+        }
+    })
+    
+    output$body <- renderUI({
+        if (USER$login == TRUE ) {
+            tabItems(
+                tabItem(tabName = "page1", p1_ui),
+                tabItem(tabName = "page2", p2_ui),
+                tabItem(tabName = "page3", p3_ui),
+                tabItem(tabName = 'page3-1',p3_1_ui),
+                tabItem(tabName = 'page3-2',p3_2_ui),
+                tabItem(tabName = "page4-2", p4_2_ui),
+                tabItem(tabName = "page4-3", p4_3_ui),
+                tabItem(tabName = "page4-4", p4_4_ui),
+                tabItem(tabName = "page4-5", p4_5_ui),
+                tabItem(tabName = "page4-6", p4_6_ui),
+                tabItem(tabName = "page4-8", p4_8_ui),
+                tabItem(tabName = "page4-10", p4_10_ui),
+                tabItem(tabName = "page5", p5_ui),
+                tabItem(tabName = "page6-00", p6_00_ui),
+                tabItem(tabName = "page6-2", p6_2_ui)
+            )
+            
+        }
+        else {
+            loginpage
+        }
+    })
     #p1
     output$pdf2 <- renderUI({
         tags$iframe(style="height:1000px; width:100%", src="CH2.pdf")
@@ -35,7 +127,7 @@ shinyServer(function(input, output, session){
         tags$iframe(style="height:1000px; width:100%", src="CH10.pdf")
     })
     
-
+    
     #p2
     output$code1 <- renderUI({
         tags$iframe(style="height:750px; width:100%", src="R-code1.pdf")
@@ -49,117 +141,117 @@ shinyServer(function(input, output, session){
     #p3
     observeEvent(input$set1,{
         output$FunctionPlot = renderText(paste(
-                                               input$p*((1+input$r/input$m)^(input$m*input$t))))
-                                               })
+            input$p*((1+input$r/input$m)^(input$m*input$t))))
+    })
     observeEvent(input$set1,{
         output$FunctionPlot0 = renderText(paste(
-                                                ((1+input$r/input$m)^(input$m*input$t))-1))
+            ((1+input$r/input$m)^(input$m*input$t))-1))
     })
     
     observeEvent(input$set2, {
         output$FunctionPlot1 = renderText(paste(
-                                                input$p1/((1+input$r1/input$m1)^(input$m1*input$t1))
-                                                
-                                                ))
+            input$p1/((1+input$r1/input$m1)^(input$m1*input$t1))
+            
+        ))
     })
     
     observeEvent(input$set3, {
         output$FunctionPlot2 = renderText(paste(
-                                                input$p2*exp(input$r2*input$t2)
+            input$p2*exp(input$r2*input$t2)
         ))
     })
     
     #p3-1
     observeEvent(input$set4, {
-    output$intPlot <- renderPlot({
-        int.fun<-input$infun
-        int.fun<-eval(parse(text=paste('function(x)',int.fun)))
-        int.base<-0
-        num.poly<-input$poly
-        from.x<-input$fromx
-        to.x<-input$tox
-        if(from.x>to.x) stop('Starting x must be less than ending x')
-        
-        poly.x<-seq(from.x,to.x,length=num.poly+1)
-        
-        polys<-sapply(
-            1:(length(poly.x)-1),
-            function(i){
+        output$intPlot <- renderPlot({
+            int.fun<-input$infun
+            int.fun<-eval(parse(text=paste('function(x)',int.fun)))
+            int.base<-0
+            num.poly<-input$poly
+            from.x<-input$fromx
+            to.x<-input$tox
+            if(from.x>to.x) stop('Starting x must be less than ending x')
+            
+            poly.x<-seq(from.x,to.x,length=num.poly+1)
+            
+            polys<-sapply(
+                1:(length(poly.x)-1),
+                function(i){
+                    
+                    x.strt<-poly.x[i]
+                    x.stop<-poly.x[i+1]
+                    
+                    cord.x<-rep(c(x.strt,x.stop),each=2) 
+                    cord.y<-c(int.base,rep(int.fun(mean(c(x.strt,x.stop))),2),int.base) 
+                    data.frame(cord.x,cord.y)
+                    
+                },
+                simplify=F
+            )
+            
+            area<-sum(unlist(lapply(
+                polys,
+                function(x) diff(unique(x[,1]))*diff(unique(x[,2]))
+            )))
+            txt.val<-paste('Area from',from.x,'to',to.x,'=',round(area,4),collapse=' ')
+            
+            y.col<-rep(unlist(lapply(polys,function(x) max(abs(x[,2])))),each=4)
+            plot.polys<-data.frame(do.call('rbind',polys),y.col)
+            
+            p1<-ggplot(data.frame(x=c(from.x,to.x)), aes(x)) + stat_function(fun=int.fun)
+            if(num.poly==1){ 
+                p1<-p1 + geom_polygon(data=plot.polys,mapping=aes(x=cord.x,y=cord.y),
+                                      alpha=0.7,color=alpha('black',0.6))
+            }
+            else{
+                p1<-p1 + geom_polygon(data=plot.polys,mapping=aes(x=cord.x,y=cord.y,fill=y.col,
+                                                                  group=y.col),alpha=0.6,color=alpha('black',0.6))
+            }
+            
+            p1<-p1 + ggtitle(txt.val) + theme(legend.position="none") 
+            
+            if(!input$intcum) print(p1) 
+            
+            else{
+                area.cum<-unlist(sapply(1:num.poly,
+                                        function(val){
+                                            poly.x<-seq(from.x,to.x,length=val+1)
+                                            
+                                            polys<-sapply(
+                                                1:(length(poly.x)-1),
+                                                function(i){
+                                                    
+                                                    x.strt<-poly.x[i]
+                                                    x.stop<-poly.x[i+1]
+                                                    
+                                                    cord.x<-rep(c(x.strt,x.stop),each=2) 
+                                                    cord.y<-c(int.base,rep(int.fun(mean(c(x.strt,x.stop))),2),int.base) 
+                                                    data.frame(cord.x,cord.y)
+                                                    
+                                                },
+                                                simplify=F
+                                            )
+                                            
+                                            sum(unlist(lapply(
+                                                polys,
+                                                function(x) diff(unique(x[,1]))*diff(unique(x[,2]))
+                                            )))
+                                            
+                                        }
+                ))
                 
-                x.strt<-poly.x[i]
-                x.stop<-poly.x[i+1]
+                dat.cum<-data.frame(Columns=1:num.poly,Area=area.cum)
+                actual<-integrate(int.fun,from.x,to.x)
                 
-                cord.x<-rep(c(x.strt,x.stop),each=2) 
-                cord.y<-c(int.base,rep(int.fun(mean(c(x.strt,x.stop))),2),int.base) 
-                data.frame(cord.x,cord.y)
+                p2<-ggplot(dat.cum, aes(x=Columns,y=Area)) + geom_point() #+ geom_smooth(span=0.1,se=F)
+                p2<-p2 + geom_hline(yintercept=actual$value,lty=2) 
+                p2<-p2 + ggtitle(paste('Actual integration',round(actual$value,4),'with absolute error',prettyNum(actual$abs.error)))
                 
-            },
-            simplify=F
-        )
-        
-        area<-sum(unlist(lapply(
-            polys,
-            function(x) diff(unique(x[,1]))*diff(unique(x[,2]))
-        )))
-        txt.val<-paste('Area from',from.x,'to',to.x,'=',round(area,4),collapse=' ')
-        
-        y.col<-rep(unlist(lapply(polys,function(x) max(abs(x[,2])))),each=4)
-        plot.polys<-data.frame(do.call('rbind',polys),y.col)
-        
-        p1<-ggplot(data.frame(x=c(from.x,to.x)), aes(x)) + stat_function(fun=int.fun)
-        if(num.poly==1){ 
-            p1<-p1 + geom_polygon(data=plot.polys,mapping=aes(x=cord.x,y=cord.y),
-                                  alpha=0.7,color=alpha('black',0.6))
-        }
-        else{
-            p1<-p1 + geom_polygon(data=plot.polys,mapping=aes(x=cord.x,y=cord.y,fill=y.col,
-                                                              group=y.col),alpha=0.6,color=alpha('black',0.6))
-        }
-        
-        p1<-p1 + ggtitle(txt.val) + theme(legend.position="none") 
-        
-        if(!input$intcum) print(p1) 
-        
-        else{
-            area.cum<-unlist(sapply(1:num.poly,
-                                    function(val){
-                                        poly.x<-seq(from.x,to.x,length=val+1)
-                                        
-                                        polys<-sapply(
-                                            1:(length(poly.x)-1),
-                                            function(i){
-                                                
-                                                x.strt<-poly.x[i]
-                                                x.stop<-poly.x[i+1]
-                                                
-                                                cord.x<-rep(c(x.strt,x.stop),each=2) 
-                                                cord.y<-c(int.base,rep(int.fun(mean(c(x.strt,x.stop))),2),int.base) 
-                                                data.frame(cord.x,cord.y)
-                                                
-                                            },
-                                            simplify=F
-                                        )
-                                        
-                                        sum(unlist(lapply(
-                                            polys,
-                                            function(x) diff(unique(x[,1]))*diff(unique(x[,2]))
-                                        )))
-                                        
-                                    }
-            ))
+                print(grid.arrange(p1,p2))
+                
+            }
             
-            dat.cum<-data.frame(Columns=1:num.poly,Area=area.cum)
-            actual<-integrate(int.fun,from.x,to.x)
-            
-            p2<-ggplot(dat.cum, aes(x=Columns,y=Area)) + geom_point() #+ geom_smooth(span=0.1,se=F)
-            p2<-p2 + geom_hline(yintercept=actual$value,lty=2) 
-            p2<-p2 + ggtitle(paste('Actual integration',round(actual$value,4),'with absolute error',prettyNum(actual$abs.error)))
-            
-            print(grid.arrange(p1,p2))
-            
-        }
-        
-    },height=500)})    
+        },height=500)})    
     
     #p3-3
     observeEvent(input$set5,{
@@ -308,13 +400,13 @@ shinyServer(function(input, output, session){
     output$QFun = renderText({"H(x) = 15-11e^(-0.1x)"})
     observeEvent(input$Bset,{
         output$Qplot = renderPlot({
-        mgf('15-(11*2.72^(-0.1*x))', from=0, to=20)
-    })})
+            mgf('15-(11*2.72^(-0.1*x))', from=0, to=20)
+        })})
     observeEvent(input$Vset,{
         output$velocityFun = renderText({
             "H'(x)=1.1e^(-0.1(x))\n=>For the rate of change after 0 weeks:\nH'(0) = 1.1e^(-0.1(0)) = 1.1e^0 = 1.1"
         })})
-
+    
     observeEvent(input$Aset,{
         output$accelerationFun = renderText({
             "H'(x)=1.1e^(-0.1(x))\n=>After 12 weeks:\nH'(12) = 1.1e^(-0.1(12)) = 1.1e^(-1.2) = 1.1(0.30) = 0.33"
@@ -429,8 +521,8 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
         tags$iframe(src = "example41001.html", width = "100%", height = "600", seamless=TRUE)
     })
     
-
-
+    
+    
     #p5
     output$moontitle = renderText({
         "無限小數與非標準分析學"
@@ -889,5 +981,7 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
           input$p_803,'\n',
           input$p_804)
     })
-})
+    })
+
+
 
