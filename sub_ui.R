@@ -161,23 +161,23 @@ p3_2_ui = fluidPage(
 )
 
 p4_4_ui = fluidPage(
-  fluidRow(
-    box(
-      width = 12,
-      textOutput("example1_question"),
-    )
-  ),
-  fluidRow(
-    box(
-      width = 12,
-      br(),
-      textOutput("QFun"),
-      br(),
-      actionButton("Bset","Plot"),
-      br(),
-      plotOutput("Qplot")
-    )
-  ),
+  box(
+    width = 12,
+    title = 'Example 1',
+    uiOutput("example1_question"),
+    
+    fluidRow(
+      box(
+        width = 12,
+        br(),
+        uiOutput("QFun"),
+        br(),
+        actionButton("Bset","Plot"),
+        br(),
+        plotOutput("Qplot")
+      )
+    )),
+  
   fluidRow(
     column(
       width = 6,
@@ -185,7 +185,14 @@ p4_4_ui = fluidPage(
         width = 200,
         textOutput("velocity"),
         actionButton("Vset","Solution")
+      ),
+      box(
+        width = 200,
+        height = 150,
+        uiOutput("velocityFun"),
+        plotOutput("Vplot")
       )
+      
     ),
     column(
       width = 6,
@@ -193,90 +200,75 @@ p4_4_ui = fluidPage(
         width = 200,
         textOutput("acceleration"),
         actionButton("Aset","Solution")
-      )
-    )
-  ),
-  fluidRow(
-    column(
-      width = 6,
+      ),
       box(
         width = 200,
-        height = 100,
-        verbatimTextOutput("velocityFun"),
-        plotOutput("Vplot")
-      )
-    ),
-    column(
-      width = 6,
-      box(
-        width = 200,
-        height = 100,
-        verbatimTextOutput("accelerationFun"),
+        height = 150,
+        uiOutput("accelerationFun"),
         plotOutput("Aplot")
       )
-    )
-  ),
+    )),
   uiOutput('html4')
 )
 
 p4_2_ui=fluidPage(
   fluidRow(
-  box(title = 'Example1',
-      width = 7,
-      textOutput('ex40201'),
-  br(),
-  fluidRow(
-    column(
-      width = 6,
-      box(
-        width = 200,
-        actionButton('ex40201_1set','Solution'),
-        verbatimTextOutput('good01'),
-        plotOutput('goodplot01')
-      )
-    ),
-    column(
-      width = 6,
-      box(
-        width = 200,
-        actionButton('ex40201_2set','Solution'),
-        verbatimTextOutput('good02'),
-        plotOutput('goodplot02')
-      )
-    )
-  )),
-  box(
-    width = 5,
-    height = 660,
-    htmlOutput('html402'))
-),
+    box(title = 'Example1',
+        width = 7,
+        uiOutput('ex40201'),
+        br(),
+        fluidRow(
+          column(
+            width = 6,
+            box(
+              width = 200,
+              actionButton('ex40201_1set','Solution'),
+              verbatimTextOutput('good01'),
+              plotOutput('goodplot01')
+            )
+          ),
+          column(
+            width = 6,
+            box(
+              width = 200,
+              actionButton('ex40201_2set','Solution'),
+              verbatimTextOutput('good02'),
+              plotOutput('goodplot02')
+            )
+          )
+        )),
+    box(
+      width = 5,
+      height = 660,
+      htmlOutput('html402'))
+  ),
   fluidRow(
     box(title = 'Example2',
         width = 7,
-        textOutput('ex40202'),
+        uiOutput('ex40202'),
         br(),
         actionButton('ex40202_1set','Solution'),
         br(),
-        verbatimTextOutput('good03')),
+        uiOutput('good03')),
     box(
       width = 5,
       height = 650,
       htmlOutput('html403')
-  )))
+    )))
 
 p4_3_ui = fluidPage(
   fluidRow(
     box(
       width = 12,
-      title = 'Question 1',
-      verbatimTextOutput("peggy_question1"),
+      title = 'Example 1',
+      uiOutput("peggy_question1"),
     )
   ),
   fluidRow(
     box(
       width = 12,
       br(),
-      verbatimTextOutput("peggy_Fun1"),
+      uiOutput("peggy_Fun1"),
       br(),
       actionButton("peggy_set1","Plot"),
       br(),
@@ -306,7 +298,7 @@ p4_3_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        verbatimTextOutput("peggy_Fun11"),
+        uiOutput("peggy_Fun11"),
         htmlOutput("peggy_html11")
       )
     ),
@@ -314,7 +306,7 @@ p4_3_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        verbatimTextOutput("peggy_Fun12"),
+        uiOutput("peggy_Fun12"),
         htmlOutput("peggy_html12")
       )
     )
@@ -332,7 +324,7 @@ p4_3_ui = fluidPage(
       width = 12,
       box(
         width = 200,
-        verbatimTextOutput("peggy_Fun13"),
+        uiOutput("peggy_Fun13"),
         htmlOutput("peggy_html13")
       )
     )
@@ -340,15 +332,15 @@ p4_3_ui = fluidPage(
   fluidRow(
     box(
       width = 12,
-      title = 'Question 2',
-      verbatimTextOutput("peggy_question2"),
+      title = 'Example 2',
+      uiOutput("peggy_question2"),
     )
   ),
   fluidRow(
     box(
       width = 12,
       br(),
-      verbatimTextOutput("peggy_Fun2"),
+      uiOutput("peggy_Fun2"),
       br(),
       actionButton("peggy_set2","Plot"),
       br(),
@@ -378,7 +370,7 @@ p4_3_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        verbatimTextOutput("peggy_Fun21"),
+        uiOutput("peggy_Fun21"),
         htmlOutput("peggy_html21")
       )
     ),
@@ -386,7 +378,7 @@ p4_3_ui = fluidPage(
       width = 6,
       box(
         width = 200,
-        verbatimTextOutput("peggy_Fun22"),
+        uiOutput("peggy_Fun22"),
         htmlOutput("peggy_html22")
       )
     )
@@ -397,6 +389,7 @@ p4_5_ui <- fluidPage(
   fluidRow(
     box(
       width = 12,
+      title = 'Example 1',
       verbatimTextOutput("example5_question"),
     )
   ),
@@ -409,18 +402,24 @@ p4_5_ui <- fluidPage(
         actionButton("setn1","Solution")
       ), box(
         width = 200,
-        verbatimTextOutput("quiz1ch5"),
+        height=270,
+        uiOutput("quiz1ch5"),
         plotOutput("quiz1plot")
       )),
     column(
       width = 6,
       box(
-        title = 'R Code',
-        solidHeader = TRUE,
-        status = 'primary',
         width = 200,
-        height = 550,
-        htmlOutput("htmln2")))),
+        verbatimTextOutput("quiz3"),
+        actionButton("setn3","Solution")
+      ),
+      box(
+        width = 200,
+        height=270,
+        uiOutput("quiz3ch5"),
+        plotOutput("quiz3plot")
+      )
+    )),
   
   fluidRow(
     column(
@@ -429,42 +428,34 @@ p4_5_ui <- fluidPage(
         width = 200,
         verbatimTextOutput("quiz2"),
         actionButton("setn2","Solution")
-      )
-    ),
-    column(
-      width = 6,
+      ),
       box(
         width = 200,
-        verbatimTextOutput("quiz3"),
-        actionButton("setn3","Solution")
-      )
-    )),
-  fluidRow(
-    column(
-      width = 6,
-      box(
-        width = 200,
-        verbatimTextOutput("quiz2ch5"),
+        height=270,
+        uiOutput("quiz2ch5"),
         plotOutput("quiz2plot")
       )
     ),
     column(
       width = 6,
       box(
+        title = 'R Code',
+        solidHeader = TRUE,
+        status = 'primary',
         width = 200,
-        verbatimTextOutput("quiz3ch5"),
-        plotOutput("quiz3plot")
-      )
-    )
+        height = 550,
+        htmlOutput("htmln2")))
   )
 )
+
 
 p4_6_ui = fluidPage(
   fluidRow(
     box(
       width = 6,
       height = 680,
-      textOutput("ddd1_question"),
+      title = 'Example 1',
+      verbatimTextOutput("ddd1_question"),
       br(),
       actionButton("dddd","Plot"),
       actionButton("ddd01","Solution"),
@@ -485,7 +476,8 @@ p4_6_ui = fluidPage(
       width = 6,
       box(
         width = 500,
-        textOutput("ddd2_question"),
+        title = 'Example 2',
+        verbatimTextOutput("ddd2_question"),
         actionButton("ddd02","Solution")
       )
       ,
@@ -508,7 +500,8 @@ p4_8_ui = fluidPage(
     box(
       width = 6,
       height = 680,
-      textOutput("ch08example1_question"),
+      title = 'Example 1',
+      verbatimTextOutput("ch08example1_question"),
       br(),
       actionButton("areaplot","Plot"),
       actionButton("sol01","Solution"),
@@ -517,54 +510,45 @@ p4_8_ui = fluidPage(
       uiOutput("sol1plot")
       
     ),
-  box(
-    title = 'R Code Practice',
-    solidHeader = TRUE,
-    status = 'primary',
-    width = 6,
-    height = 680,
-    htmlOutput("html2"))),
+    box(
+      title = 'R Code Practice',
+      solidHeader = TRUE,
+      status = 'primary',
+      width = 6,
+      height = 680,
+      htmlOutput("html2"))),
   fluidRow(
-     box(
-       width = 6,
+    box(
+      width = 6,
       box(
         width = 500,
-        textOutput("ch08example2_question"),
+        title = 'Example 2',
+        verbatimTextOutput("ch08example2_question"),
         actionButton("sol02","Solution")
       )
-    ,
+      ,
       box(
         width = 500,
         uiOutput("sol02plot")
       )),
-  box(
-    title = 'R Code Practice',
-    solidHeader = TRUE,
-    status = 'primary',
-    width = 6,
-    height = 650,
-    htmlOutput("html3")))
+    box(
+      title = 'R Code Practice',
+      solidHeader = TRUE,
+      status = 'primary',
+      width = 6,
+      height = 650,
+      htmlOutput("html3")))
   
 )
 
 p4_10_ui=fluidPage(
   fluidRow(
-    box(
-      width = 12,
-      textOutput("example10_question"),
-    ),
-    box(
-      width=12,
-      htmlOutput("html0003"))
-  ),
-  
-  
-  fluidRow(
     column(
       width = 6,
       box(
+        title = 'Example1',
         width = 200,
-        textOutput("Q001"),
+        uiOutput("Q001"),
         actionButton("V001","Solution")
       )
     ),
@@ -572,7 +556,8 @@ p4_10_ui=fluidPage(
       width = 6,
       box(
         width = 200,
-        textOutput("Q002"),
+        title = 'Example2',
+        uiOutput("Q002"),
         actionButton("V002","Solution")
       )
     )
@@ -582,17 +567,18 @@ p4_10_ui=fluidPage(
       width = 6,
       box(
         width = 200,
-        textOutput("A001")
+        uiOutput("A001")
       )
     ),
     column(
       width = 6,
       box(
         width = 200,
-        textOutput("A002")
+        uiOutput("A002")
       )
     )
-  )
+  ),
+  htmlOutput("html0003")
 )
 
 p5_ui=fluidPage(
@@ -652,203 +638,16 @@ p5_ui=fluidPage(
 
 #P6
 p6_00_ui=fluidPage(
-  radioButtons("rb1", "Let f  be the function defined by f (x) = 4x + 8.
-  Find f (1), f (- 1), f (a), f (- a), and f (a + 1). 
-",
-               choiceNames = list(
-                 'a. f (1) = 12, f (- 1) = 4, f (a) = a + 8, f(- a) = - a + 8, f (a + 1) = 4a + –4',
-                 'b. f (1) = 11, f (- 1) = 5, f (a) = 4a + 8, f(- a) = - 4a + 8',
-                 'c. f (1) = 10, f (- 1) = 6, f (a) = 12, f(- a) = 4, f (a + 1) = 4a + 12',
-                 'd. f (1) = 12, f (- 1) = 4, f (a) = 4a + 8, f(- a) = 4, f (a + 1) = 4a + 8',
-                 'e. f (1) = 12, f (- 1) = 4, f (a) = 4a + 8, f(- a) = - 4a + 8, f (a + 1) = 4a + 12'
-               ),
-               choiceValues = list(
-                 "Wrong", "Wrong", "Wrong",'Wrong',"Correct!"
-               ),
-               width=1000),
-  textOutput("txt1"),
-  br(),
-  
-  radioButtons("rb2", "Determine whether the statement is true or false. 
-               If f is a function, then f (a + b) = f (a) + f (b).",
-               choiceNames = list(
-                 'a. True',
-                 'b. False'
-               ),
-               choiceValues = list(
-                 "Correct!",'Wrong'
-               ),
-               width=1000,
-               inline = T),
-  textOutput("txt2"),
-  br(),
-  actionButton("do", "Submit")
   
 )
 
 p6_2_ui=fluidPage(
-  box(
+  fluidRow(
     width = 10,
-      box(
-        width = 900,
-        title='Question 1',
-        status = 'primary',
-        uiOutput("choice201"),
-        br(),
-        radioButtons("p_201", "Select the CORRECT answer",
-                     choices = c(
-                       'a','b','c','d','e'
-                     ),
-                     width=1000,
-                     inline = T,
-                     selected = 0
-        )
-      ),
-      box(
-        width = 900,
-        title='Question 2',
-        status = 'primary',
-        uiOutput("choice202"),
-        br(),
-        radioButtons("p_202", "Select the CORRECT answer",
-                     choices = c(
-                       'a','b'
-                     ),
-                     width=1000,
-                     inline = T,
-                     selected = 0)
-      ),
-      box(
-        width = 900,
-        title='Question 3',
-        status = 'primary',
-        uiOutput("choice203"),
-        br(),
-        radioButtons("p_203", "Select the CORRECT answer",
-                     choices = c(
-                       'a','b','c','d'
-                     ),
-                     width=1000,
-                     inline = T,
-                     selected = 0)
-      ),
-      box(
-        width = 900,
-        title='Question 4',
-        status = 'primary',
-        uiOutput("dddd301"),
-        br(),
-        radioButtons("d_301", "Select the CORRECT answer",
-                     choices = c(
-                       'a','b','c','d','e'
-                     ),
-                     width=1000,
-                     inline = T,
-                     selected = 0)
-      ),
-    box(
-      width = 900,
-      title='Question 5',
-      status = 'primary',
-      uiOutput("dddd302"),
-      br(),
-      radioButtons("d_302", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 6',
-      status = 'primary',
-      uiOutput("dddd303"),
-      br(),
-      radioButtons("d_303", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 7',
-      status = 'primary',
-      uiOutput("dddd304"),
-      br(),
-      radioButtons("d_304", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 8',
-      status = 'primary',
-      uiOutput("J401"),
-      br(),
-      radioButtons("d_401", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 9',
-      status = 'primary',
-      uiOutput("J402"),
-      br(),
-      radioButtons("d_402", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 10',
-      status = 'primary',
-      uiOutput("J403"),
-      br(),
-      radioButtons("d_403", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    box(
-      width = 900,
-      title='Question 11',
-      status = 'primary',
-      uiOutput("J404"),
-      br(),
-      radioButtons("d_404", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
     box(
       width = 200,
-      title='Question 12',
-      status = 'primary',
-      uiOutput("choice301"),
+      title='Question 1',
+      uiOutput("choice001"),
       br(),
       radioButtons("p_301", "Select the CORRECT answer",
                    choices = c(
@@ -861,9 +660,8 @@ p6_2_ui=fluidPage(
     ),
     box(
       width = 200,
-      title='Question 13',
-      status = 'primary',
-      uiOutput("choice302"),
+      title='Question 2',
+      uiOutput("choice002"),
       br(),
       radioButtons("p_302", "Select the CORRECT answer",
                    choices = c(
@@ -871,14 +669,12 @@ p6_2_ui=fluidPage(
                    ),
                    width=1000,
                    inline = T,
-                   selected = 0
-      )
+                   selected = 0)
     ),
     box(
       width = 200,
-      title='Question 13',
-      status = 'primary',
-      uiOutput("choice303"),
+      title='Question 3',
+      uiOutput("choice003"),
       br(),
       radioButtons("p_303", "Select the CORRECT answer",
                    choices = c(
@@ -886,44 +682,27 @@ p6_2_ui=fluidPage(
                    ),
                    width=1000,
                    inline = T,
-                   selected = 0
-      )
+                   selected = 0)
     ),
     box(
       width = 200,
-      title='Question 14',
-      status = 'primary',
-      uiOutput("choice304"),
+      title='Question 4',
+      uiOutput("choice004"),
       br(),
       radioButtons("p_304", "Select the CORRECT answer",
                    choices = c(
-                     'a','b'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0
-      )
-    ),
-    box(
-      width = 200,
-      title='Question 1',
-      uiOutput("choice101"),
-      br(),
-      radioButtons("p_101", "Select the CORRECT answer",
-                   choices = c(
                      'a','b','c','d','e'
                    ),
                    width=1000,
                    inline = T,
-                   selected = 0
-      )
-      ),
+                   selected = 0)
+    ),
     box(
       width = 200,
-      title='Question 2',
-      uiOutput("choice102"),
+      title='Question 5',
+      uiOutput("choice005"),
       br(),
-      radioButtons("p_102", "Select the CORRECT answer",
+      radioButtons("p_305", "Select the CORRECT answer",
                    choices = c(
                      'a','b','c','d','e'
                    ),
@@ -933,10 +712,10 @@ p6_2_ui=fluidPage(
     ),
     box(
       width = 200,
-      title='Question 3',
-      uiOutput("choice103"),
+      title='Question 6',
+      uiOutput("choice006"),
       br(),
-      radioButtons("p_103", "Select the CORRECT answer",
+      radioButtons("p_306", "Select the CORRECT answer",
                    choices = c(
                      'a','b','c','d','e'
                    ),
@@ -946,10 +725,10 @@ p6_2_ui=fluidPage(
     ),
     box(
       width = 200,
-      title='Question 4',
-      uiOutput("choice104"),
+      title='Question 7',
+      uiOutput("choice007"),
       br(),
-      radioButtons("p_104", "Select the CORRECT answer",
+      radioButtons("p_307", "Select the CORRECT answer",
                    choices = c(
                      'a','b','c','d','e'
                    ),
@@ -959,24 +738,10 @@ p6_2_ui=fluidPage(
     ),
     box(
       width = 200,
-      title='Question 1',
-      uiOutput("choice501"),
+      title='Question 8',
+      uiOutput("choice008"),
       br(),
-      radioButtons("p_501", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d','e'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0
-      )
-    ),
-    box(
-      width = 200,
-      title='Question 2',
-      uiOutput("choice502"),
-      br(),
-      radioButtons("p_502", "Select the CORRECT answer",
+      radioButtons("p_308", "Select the CORRECT answer",
                    choices = c(
                      'a','b','c','d','e'
                    ),
@@ -986,72 +751,30 @@ p6_2_ui=fluidPage(
     ),
     box(
       width = 200,
-      title='Question 3',
-      uiOutput("choice503"),
+      title='Question 9',
+      uiOutput("choice009"),
       br(),
-      radioButtons("p_503", "Select the CORRECT answer",
+      radioButtons("p_309", "Select the CORRECT answer",
                    choices = c(
                      'a','b','c','d','e'
                    ),
                    width=1000,
                    inline = T,
-                   selected = 0
-      )
-      ),
-    box(
-      width = 200,
-      title='Question 1',
-      uiOutput("choice801"),
-      br(),
-      radioButtons("p_801", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0
-      )
-    ),
-    box(
-      width = 200,
-      title='Question 2',
-      uiOutput("choice802"),
-      br(),
-      radioButtons("p_802", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c','d'
-                   ),
-                   width=1000,
-                   inline = T,
                    selected = 0)
     ),
     box(
       width = 200,
-      title='Question 3',
-      uiOutput("choice803"),
+      title='Question 10',
+      uiOutput("choice010"),
       br(),
-      radioButtons("p_803", "Select the CORRECT answer",
+      radioButtons("p_310", "Select the CORRECT answer",
                    choices = c(
-                     'a','b','c'
+                     'a','b','c','d','e'
                    ),
                    width=1000,
                    inline = T,
                    selected = 0)
-    ),
-    box(
-      width = 200,
-      title='Question 4',
-      uiOutput("choice804"),
-      br(),
-      radioButtons("p_804", "Select the CORRECT answer",
-                   choices = c(
-                     'a','b','c'
-                   ),
-                   width=1000,
-                   inline = T,
-                   selected = 0)
-    ),
-    actionButton("p_do", "Submit"))
-  
+    )
+  ),
+  actionButton("p_do", "Submit")
 )
-

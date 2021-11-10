@@ -7,6 +7,8 @@ require(mosaic)
 require(devtools)
 require(shinyforms)
 library(rsconnect)
+#remotes::install_github("juba/shinyglide")
+library(shinyglide)
 #rsconnect::deployApp('path/to/your/app')
 source("mgf.R")
 source("sub_ui.R")
@@ -314,9 +316,9 @@ shinyServer(function(input, output, session){
     })
     
     #p4-2
-    output$ex40201 = renderText({'Ace Truck leases its 10-ft box truck at $35/day and $0.45/mi, 
-        whereas Acme Truck leases a similar truck at $30/day and $0.50/mi. Find the daily cost 
-        of leasing from each company as a function of x number of miles driven.'})
+    output$ex40201= renderUI({
+        tags$iframe(width = "100%", height = "100", src='pic01.png')
+    })
     observeEvent(input$ex40201_1set,{
         output$good01=renderText({
             'f(Ace)=35+0.45x'
@@ -336,12 +338,13 @@ shinyServer(function(input, output, session){
     output$html402 = renderUI({
         tags$iframe(width="100%", height="600", src='example01.html',seamless=TRUE)
     })
-    output$ex40202 = renderText({' For the supply equation p=x^3+2x^2+3 where x is the quantity 
-    supplied in units of a thousand and p is the unit price in dollars, determine the price at 
-    which the supplier will make 3 units of the commodity available in the market.'})
+    output$ex40202= renderUI({
+        tags$iframe(width = "100%", height = "100", src='pic02.png')
+    })
     
     observeEvent(input$ex40202_1set,{
-        output$good03=renderText({'p(x=3)=3^3+2×3^2+3=48'
+        output$good03=renderUI({
+            tags$iframe(width = "100%", height = "40", src='pic03.png')
         })
     })
     output$html403 = renderUI({
@@ -349,22 +352,24 @@ shinyServer(function(input, output, session){
     })
     
     #4-3
-    output$peggy_question1 = renderText({
-        "A certain species of turtle faces extinction because dealers collect truckloads of turtle eggs to be sold as aphrodisiacs.\nAfter severe conservation measures are implemented, it is hoped that the turtle population will grow according to the rule:\nN(t) = 2t^3 + 4t^2 - 5t + 1000   0<t<10, where N(t) denotes the population at the end of year t."})
+    output$peggy_question1 = renderUI({
+        tags$iframe(width = "100%", height = "130", src='pic04.png')
+    })
     output$peggy_que11 = renderText({"(a) Find the rate of growth of the turtle population when t=2."})
     output$peggy_que12 = renderText({
         "(b) Find the rate of growth of the turtle population when t=4."})
     output$peggy_que13 = renderText({
         "(c) What will be the population 10 yr after the conservation measures are implemented?"})
-    output$peggy_Fun1 = renderText({"N(t) = 2t^3 + 4t^2 - 5t + 1000"})
+    output$peggy_Fun1 = renderUI({
+        tags$iframe(width = "100%", height = "40", src='pic05.png')
+})
     observeEvent(input$peggy_set1,{
         output$peggy_plot1 = renderPlot({
             mgf('2*x^3+4*x^2-5*x+1000', from=0, to=10)
         })})
     observeEvent(input$peggy_set11,{
-        output$peggy_Fun11 = renderText({
-            "For the rate of growth when t=2:
-            N'(2) = 6*2^2 + 8*2 - 5 = 35"
+        output$peggy_Fun11 = renderUI({
+            tags$iframe(width = "100%", height = "75", src='pic06.png')
         })
         output$peggy_html11 = renderUI({
             tags$iframe(width="100%", height="360", src='code11.html',seamless=TRUE)
@@ -372,9 +377,8 @@ shinyServer(function(input, output, session){
     })
     
     observeEvent(input$peggy_set12,{
-        output$peggy_Fun12 = renderText({
-            "For the rate of growth when t=4:
-            N'(4) = 6*4^2 + 8*4 - 5 = 123"
+        output$peggy_Fun12 = renderUI({
+            tags$iframe(width = "100%", height = "75", src='pic07.png')
         })
         output$peggy_html12 = renderUI({
             tags$iframe(width="100%", height="360", src='code12.html',seamless=TRUE)
@@ -382,9 +386,8 @@ shinyServer(function(input, output, session){
     })
     
     observeEvent(input$peggy_set13,{
-        output$peggy_Fun13 = renderText({
-            "For the population 10 yr after the conservation measures:
-            N(10) = 2*10^3 + 4*10^2 - 5t + 1000 = 3350"
+        output$peggy_Fun13 = renderUI({
+            tags$iframe(width = "100%", height = "75", src='pic08.png')
         })
         output$peggy_html13 = renderUI({
             tags$iframe(width="100%", height="360", src='code13.html',seamless=TRUE)
@@ -392,21 +395,23 @@ shinyServer(function(input, output, session){
     })
     
     ### 4-3Q2 ###
-    output$peggy_question2 = renderText({
-        "During testing of a certain brand of air purifier, the amount of smoke remaining t min after the start of the test was\nA(t) = -0.00006t^5 + 0.00468t^4 - 0.1316t^3 + 1.915t^2 - 17.63t +100 percent of the original amount."})
+    output$peggy_question2 = renderUI({
+        tags$iframe(width="100%", height="79", src='pic09.png')
+    })
     output$peggy_que21 = renderText({"(a) Find the percentage per minute when t=3 ( A'(3) )."})
     output$peggy_que22 = renderText({
         "(b) Find the percentage per minute in the second power when t=3 ( A''(3) )."})
-    output$peggy_Fun2 = renderText({"A(t) = -0.00006t^5 + 0.00468t^4 - 0.1316t^3 + 1.915t^2 - 17.63t +100"})
+    output$peggy_Fun2 = renderUI({
+        tags$iframe(width="100%", height="40", src='pic10.png')
+    })
     observeEvent(input$peggy_set2,{
         output$peggy_plot2 = renderPlot({
             mgf('-0.00006*x^5+0.00468*x^4-0.1316*x^3+1.915*x^2-17.63*x+100', from=0, to=10)
         })
     })
     observeEvent(input$peggy_set21,{
-        output$peggy_Fun21 = renderText({
-            "For the percentage per minute when t=3:
-            A'(3) = -0.003*3^4 + 0.01872*3^3 - 0.2632*3^2 + 3.83*3 -17.63 = -9.212"
+        output$peggy_Fun21 = renderUI({
+            tags$iframe(width="100%", height="75", src='pic11.png')
         })
         output$peggy_html21 = renderUI({
             tags$iframe(width="100%", height="360", src='code21.html',seamless=TRUE)
@@ -414,9 +419,8 @@ shinyServer(function(input, output, session){
     })
     
     observeEvent(input$peggy_set22,{
-        output$peggy_Fun22 = renderText({
-            "For the percentage per minute in the second power when t=3:
-            A''(3) = -0.012*3^3 + 0.3744*3^2 - 0.5264*3 + 3.83 = 1.934"
+        output$peggy_Fun22 = output$peggy_Fun21 = renderUI({
+            tags$iframe(width="100%", height="75", src='pic12.png')
         })
         output$peggy_html22 = renderUI({
             tags$iframe(width="100%", height="360", src='code22.html',seamless=TRUE)
@@ -425,22 +429,26 @@ shinyServer(function(input, output, session){
     
     #p4-4
     #改成215 APPLIED EXAMPLE 4
-    output$example1_question = renderText({"After t weeks of practice a pole vaulter can vault feet.Find the rate of change of the athlete's jumps after"})
+    output$example1_question = renderUI({
+        tags$iframe(width="100%", height="40", src='pic13.png')
+    })
     output$velocity = renderText({"(a) 0 week (at the beginning of training)"})
     output$acceleration = renderText({"(b) 12 weeks"})
-    output$QFun = renderText({"H(x) = 15-11e^(-0.1x)"})
+    output$QFun = renderUI({
+        tags$iframe(width="100%", height="40", src='pic14.png')
+    })
     observeEvent(input$Bset,{
         output$Qplot = renderPlot({
             mgf('15-(11*2.72^(-0.1*x))', from=0, to=20)
         })})
     observeEvent(input$Vset,{
-        output$velocityFun = renderText({
-            "H'(x)=1.1e^(-0.1(x))\n=>For the rate of change after 0 weeks:\nH'(0) = 1.1e^(-0.1(0)) = 1.1e^0 = 1.1"
+        output$velocityFun = renderUI({
+            tags$iframe(width="100%", height="110", src='pic15.png')
         })})
     
     observeEvent(input$Aset,{
-        output$accelerationFun = renderText({
-            "H'(x)=1.1e^(-0.1(x))\n=>After 12 weeks:\nH'(12) = 1.1e^(-0.1(12)) = 1.1e^(-1.2) = 1.1(0.30) = 0.33"
+        output$accelerationFun = renderUI({
+            tags$iframe(width="100%", height="110", src='pic16.png')
         })
     })
     output$html4 = renderUI({
@@ -458,24 +466,18 @@ shinyServer(function(input, output, session){
     output$quiz2 = renderText({"∫(1/x)dx"})
     output$quiz3 = renderText({"∫(e+1)dx"})
     observeEvent(input$setn1,{
-        output$quiz1ch5 = renderText({
-            "The answer is :
-           3*X^2/2-2X + C
-          =3X^2/2-2X + C"
+        output$quiz1ch5 = renderUI({
+            tags$iframe(width="100%", height="230", src='pic17.png')
         })})
     
     observeEvent(input$setn2,{
-        output$quiz2ch5 = renderText({
-            "The answer is :
-         ∫1/xdx = ln x + c =
-            ln x + C"
+        output$quiz2ch5 = renderUI({
+            tags$iframe(width="100%", height="190", src='pic18.png')
         })})
     
     observeEvent(input$setn3,{
-        output$quiz3ch5 = renderText({
-            "The answer is:
-        ∫kdx = kx+c =
-        ∫(e+1)dx = (e+1)x + C"
+        output$quiz3ch5 = renderUI({
+            tags$iframe(width="100%", height="230", src='pic19.png')
         })
     })
     
@@ -484,18 +486,18 @@ shinyServer(function(input, output, session){
     output$ddd2_question = renderText({"Evaluate xlnx dx"})
     observeEvent(input$dddd,{
         output$daplot = renderUI({
-            tags$iframe(width = "500", height = "450", src='ex6-1-1.png')
+            tags$iframe(width = "100%", height = "350", src='ex6-1-1.jpg')
         })})
     observeEvent(input$ddd01,{
         output$dsol1plot = renderUI({
-            tags$iframe(width = "400", height = "150", src='ex6-1-a.png')
+            tags$iframe(width = "100%", height = "150", src='ex6-1-c.png')
         })})
     output$htmld2 = renderUI({
         tags$iframe(width="100%", height="600", src='fabian6html01.html',seamless=TRUE)
     })
     observeEvent(input$ddd02,{
         output$ddd02plot = renderUI({
-            tags$iframe(width = "400", height = "150", src='ex6-1-a.png')
+            tags$iframe(width = "100%", height = "120", src='ex6-2-a.png')
         })})
     output$htmld3 = renderUI({
         tags$iframe(width="100%", height="600", src='fabian6html02.html',seamless=TRUE)
@@ -525,28 +527,19 @@ shinyServer(function(input, output, session){
     })
     
     #4-10
-    output$example10_question = renderText({"ANSWER THE QUESTION
- "})
-    output$Q001 = renderText({"Sum the first 4 terms of 10, 30, 90, 270, 810, 2430, ..
-The values of a, r and n are:
-
-a = 10 (the first term)
-r = 3 (the common ratio)
-n = 4 (we want to sum the first 4 terms)
- "})
-    output$Q002 = renderText({"Sam deposits $50 on the first of each month into an account which 
-    arns 0.5% interest each month. To the nearest dollar, how much is in the account right after 
-    Sam makes his last deposit on the first day of the fifth year (the 49th month).
-
-The deposits that Sam make and the interest earned on each deposit generate a geometric series
-"})
+    output$Q001 = renderUI({
+        tags$iframe(width = "100%", height = "240", src='pic20.png')
+    })
+    output$Q002 = renderUI({
+        tags$iframe(width = "100%", height = "240", src='pic21.png')
+    })
     observeEvent(input$V001,{
-        output$A001 = renderText({
-            "(4-1)∑(k=0) 10(3)^k=400"
+        output$A001 = renderUI({
+            tags$iframe(width = "100%", height = "55", src='pic22.png')
         })})
     observeEvent(input$V002,{
-        output$A002 = renderText({
-            "Evaluate 8∑(n=3)2(-3)^(n-1)"
+        output$A002 = renderUI({
+            tags$iframe(width = "100%", height = "55", src='pic23.png')
         })})
     output$html0003 <- renderUI({
         tags$iframe(src = "example41001.html", width = "100%", height = "600", seamless=TRUE)
@@ -617,340 +610,56 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
     })
     
     ### p6 ###
-    output$choice201= renderUI({
-        tags$iframe(width = "630", height = "360", src='choice201.png')
+    item<-sample(1:100,10,replace = FALSE)
+    x<-list('1'='b','2'='b','3'='c','4'='e','5'='b','6'='d','7'='b','8'='e','9'='d','10'='c',
+            '11'='d','12'='c','13'='e','14'='d','15'='a','16'='a','17'='d','18'='c','19'='a','20'='c',
+            '21'='b','22'='e','23'='d','24'='a','25'='b','26'='c','27'='d','28'='a','29'='c','30'='e',
+            '31'='c','32'='a','33'='e','34'='a','35'='b','36'='a','37'='d','38'='c','39'='a','40'='a',
+            '41'='c','42'='c','43'='d','44'='b', '45'='c','46'='c','47'='e','48'='c','49'='d','50'='c',
+            '51'='d','52'='d','53'='c','54'='e','55'='e','56'='e','57'='a','58'='e','59'='b','60'='c',
+            '61'='b','62'='a','63'='b','64'='a','65'='a','66'='a','67'='c','68'='d','69'='a','70'='c',
+            '71'='a','72'='d','73'='a','74'='a','75'='d','76'='c','77'='e','78'='c','79'='a','80'='a',
+            '81'='c','82'='e','83'='b','84'='a','85'='a','86'='a','87'='a','88'='a','89'='a','90'='a',
+            '91'='b','92'='b','93'='b','94'='b','95'='c','96'='c','97'='c','98'='c','99'='d','100'='e')
+    
+    output$choice001= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[1]))
+    })
+    output$choice002= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[2]))
+    })
+    output$choice003= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[3]))
+    })
+    output$choice004= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[4]))
+    })
+    output$choice005= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[5]))
+    })
+    output$choice006= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[6]))
+    })
+    output$choice007= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[7]))
+    })
+    output$choice008= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[8]))
+    })
+    output$choice009= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[9]))
+    })
+    output$choice010= renderUI({
+        tags$iframe(width = "860", height = "700", src=sprintf('%s.png',item[10]))
     })
     
-    output$choice202= renderUI({
-        tags$iframe(width = "630", height = "420", src='choice202.png')
-    })
-    
-    output$choice203= renderUI({
-        tags$iframe(width = "630", height = "210", src='choice203.png')
-    })
-    
-    output$dddd301= renderUI({
-        tags$iframe(width = "550", height = "250", src='dd1.png')
-    })
-    
-    output$dddd302= renderUI({
-        tags$iframe(width = "550", height = "250", src='dd2.png')
-    })
-    
-    output$dddd303= renderUI({
-        tags$iframe(width = "550", height = "250", src='dd3.png')
-    })
-    
-    output$dddd304= renderUI({
-        tags$iframe(width = "550", height = "250", src='dd4.png')
-    })
-    
-    output$J401= renderUI({
-        tags$iframe(width = "550", height = "250", src='J401.png')
-    })
-    
-    output$J402= renderUI({
-        tags$iframe(width = "550", height = "250", src='J402.png')
-    })
-    
-    output$J403= renderUI({
-        tags$iframe(width = "550", height = "250", src='J403.png')
-    })
-    
-    output$J404= renderUI({
-        tags$iframe(width = "550", height = "250", src='J404.png')
-    })
-    
-    output$choice301= renderUI({
-        tags$iframe(width = "450", height = "450", src='choice301.png')
-    })
-    
-    output$choice302= renderUI({
-        tags$iframe(width = "450", height = "620", src='choice302.png')
-    })
-    
-    output$choice303= renderUI({
-        tags$iframe(width = "100%", height = "500", src='choice303.png')
-    })
-    
-    output$choice304= renderUI({
-        tags$iframe(width = "650", height = "270", src='choice304.png')
-    })
-    
-    output$choice101= renderUI({
-        tags$iframe(width = "750", height = "550", src='choice101.png')
-    })
-    
-    output$choice102= renderUI({
-        tags$iframe(width = "750", height = "550", src='choice102.png')
-    })
-    output$choice103= renderUI({
-        tags$iframe(width = "750", height = "600", src='choice103.png')
-    })
-    output$choice104= renderUI({
-        tags$iframe(width = "750", height = "600", src='choice104.png')
-    })
-    
-    output$choice501= renderUI({
-        tags$iframe(width = "450", height = "650", src='choice501.png')
-    })
-    
-    output$choice502= renderUI({
-        tags$iframe(width = "670", height = "550", src='choice502.png')
-    })
-    
-    output$choice503= renderUI({
-        tags$iframe(width = "390", height = "550", src='choice503.png')
-    })
-    
-    output$choice801= renderUI({
-        tags$iframe(width = "450", height = "300", src='choice801.png')
-    })
-    
-    output$choice802= renderUI({
-        tags$iframe(width = "450", height = "300", src='choice802.png')
-    })
-    output$choice803= renderUI({
-        tags$iframe(width = "450", height = "300", src='choice803.png')
-    })
-    output$choice804= renderUI({
-        tags$iframe(width = "450", height = "300", src='choice804.png')
-    })
-    
-    p_f201=function(q201){
-        if(q201=='a'){
-            return('Correct')
+    lst<-list()
+    for (i in c(1:10)){
+        for (j in c(1:100)){
+            if (item[i]==j){
+                lst<-c(lst,x[[j]])
+            }
         }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f202=function(q202){
-        if(q202=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    
-    p_f203=function(q203){
-        if(q203=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    
-    d_f301=function(q601){
-        if(q601=='d'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    d_f302=function(q602){
-        if(q602=='b'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    d_f303=function(q603){
-        if(q603=='e'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    d_f304=function(q604){
-        if(q604=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    d_f401=function(q401){
-        if(q401=='b'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    d_f402=function(q402){
-        if(q402=='b'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    d_f403=function(q403){
-        if(q403=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    d_f404=function(q404){
-        if(q404=='e'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    p_f301=function(q301){
-        if(q301=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f302=function(q302){
-        if(q302=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f303=function(q303){
-        if(q303=='e'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f304=function(q304){
-        if(q304=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f101=function(q101){
-        if(q101=="c"){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f102=function(q102){
-        if(q102=="c"){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    p_f103=function(q103){
-        if(q103=="e"){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    p_f104=function(q104){
-        if(q104=="c"){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    
-    p_f501=function(q501){
-        if(q501=='b'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f502=function(q502){
-        if(q502=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    
-    p_f503=function(q503){
-        if(q502=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    
-    p_f801=function(q801){
-        if(q801=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-    }
-    
-    p_f802=function(q802){
-        if(q802=='d'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    p_f803=function(q803){
-        if(q803=='a'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
-    }
-    p_f804=function(q804){
-        if(q804=='c'){
-            return('Correct')
-        }
-        else{
-            return('Wrong')
-        }
-        
     }
     
     
@@ -981,38 +690,22 @@ The deposits that Sam make and the interest earned on each deposit generate a ge
         ))
     })
     
-    output$peggy_show01 = renderText({
-        '1  a\n2  a\n3  c\n4  d\n5  b\n6  e\n7  c\n8  b\n9  b\n10  c\n11  e\n12  c\n13  a\n14  e\n15  a\n16  c\n17  c\n18  e\n19  c\n20  b\n21  a\n22  c\n23  a\n24  d\n25  a\n26  c'
+    output$peggy_show01 = renderPrint({
+        for (i in c(1:10)){
+            cat(lst[[i]],sep='\n')
+        }
     })
     output$p_text02<-renderText({
-        c('',input$p_201,'\n',
-          input$p_202,'\n',
-          input$p_203,'\n',
-          input$d_301,'\n',
-          input$d_302,'\n',
-          input$d_303,'\n',
-          input$d_304,'\n',
-          input$d_401,'\n',
-          input$d_402,'\n',
-          input$d_403,'\n',
-          input$d_404,'\n',
-          input$p_301,'\n',
+        c('',input$p_301,'\n',
           input$p_302,'\n',
           input$p_303,'\n',
           input$p_304,'\n',
-          input$p_101,'\n',
-          input$p_102,'\n',
-          input$p_103,'\n',
-          input$p_104,'\n',
-          input$p_501,'\n',
-          input$p_502,'\n',
-          input$p_503,'\n',
-          input$p_801,'\n',
-          input$p_802,'\n',
-          input$p_803,'\n',
-          input$p_804)
+          input$p_305,'\n',
+          input$p_306,'\n',
+          input$p_307,'\n',
+          input$p_308,'\n',
+          input$p_309,'\n',
+          input$p_310)
     })
-    })
-
-
+})
 
