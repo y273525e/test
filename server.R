@@ -7,8 +7,8 @@ require(mosaic)
 require(devtools)
 require(shinyforms)
 library(rsconnect)
+require(shinyglide)
 #remotes::install_github("juba/shinyglide")
-library(shinyglide)
 #rsconnect::deployApp('path/to/your/app')
 source("mgf.R")
 source("sub_ui.R")
@@ -316,8 +316,12 @@ shinyServer(function(input, output, session){
     })
     
     #p4-2
+    Previous_Button=tags$div(actionButton("Prev_Tab",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-left fa-2x"></i></div>
+                                                                  ')))
+    Next_Button=div(actionButton("Next_Tab",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-right fa-2x"></i></div>')))
+
     output$ex40201= renderUI({
-        tags$iframe(width = "100%", height = "100", src='pic01.png')
+        tags$iframe(width = "100%", height = "120", src='pic01.png')
     })
     observeEvent(input$ex40201_1set,{
         output$good01=renderText({
@@ -339,7 +343,7 @@ shinyServer(function(input, output, session){
         tags$iframe(width="100%", height="600", src='example01.html',seamless=TRUE)
     })
     output$ex40202= renderUI({
-        tags$iframe(width = "100%", height = "100", src='pic02.png')
+        tags$iframe(width = "100%", height = "120", src='pic02.png')
     })
     
     observeEvent(input$ex40202_1set,{
@@ -350,8 +354,37 @@ shinyServer(function(input, output, session){
     output$html403 = renderUI({
         tags$iframe(width="100%", height="600", src='example02.html',seamless=TRUE)
     })
+    output$Next_Previous=renderUI({
+        tab_list=input$List_of_tab[-length(input$List_of_tab)]
+        nb_tab=length(tab_list)
+        if (which(tab_list==input$tabBox_next_previous)==nb_tab)
+            column(1,offset=1,Previous_Button)
+        else if (which(tab_list==input$tabBox_next_previous)==1)
+            column(1,offset = 10,Next_Button)
+        else
+            div(column(1,offset=1,Previous_Button),column(1,offset=8,Next_Button))
+        
+    })
+    observeEvent(input$Prev_Tab,
+                 {
+                     tab_list=input$List_of_tab
+                     current_tab=which(tab_list==input$tabBox_next_previous)
+                     updateTabsetPanel(session,"tabBox_next_previous",selected=tab_list[current_tab-1])
+                 }
+    )
+    observeEvent(input$Next_Tab,
+                 {
+                     tab_list=input$List_of_tab
+                     current_tab=which(tab_list==input$tabBox_next_previous)
+                     updateTabsetPanel(session,"tabBox_next_previous",selected=tab_list[current_tab+1])
+                 }
+    )
     
     #4-3
+    Previous_Button1=tags$div(actionButton("Prev_Tab1",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-left fa-2x"></i></div>
+                                                                  ')))
+    Next_Button1=div(actionButton("Next_Tab1",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-right fa-2x"></i></div>')))
+    
     output$peggy_question1 = renderUI({
         tags$iframe(width = "100%", height = "130", src='pic04.png')
     })
@@ -426,9 +459,38 @@ shinyServer(function(input, output, session){
             tags$iframe(width="100%", height="360", src='code22.html',seamless=TRUE)
         })
     })
+    output$Next_Previous1=renderUI({
+        tab_list1=input$List_of_tab1[-length(input$List_of_tab1)]
+        nb_tab1=length(tab_list1)
+        if (which(tab_list1==input$tabBox_next_previous1)==nb_tab1)
+            column(1,offset=1,Previous_Button1)
+        else if (which(tab_list1==input$tabBox_next_previous1)==1)
+            column(1,offset = 10,Next_Button1)
+        else
+            div(column(1,offset=1,Previous_Button1),column(1,offset=8,Next_Button1))
+        
+    })
+    observeEvent(input$Prev_Tab1,
+                 {
+                     tab_list1=input$List_of_tab1
+                     current_tab1=which(tab_list1==input$tabBox_next_previous1)
+                     updateTabsetPanel(session,"tabBox_next_previous1",selected=tab_list1[current_tab1-1])
+                 }
+    )
+    observeEvent(input$Next_Tab1,
+                 {
+                     tab_list1=input$List_of_tab1
+                     current_tab1=which(tab_list1==input$tabBox_next_previous1)
+                     updateTabsetPanel(session,"tabBox_next_previous1",selected=tab_list1[current_tab1+1])
+                 }
+    )
     
     #p4-4
     #改成215 APPLIED EXAMPLE 4
+    Previous_Button2=tags$div(actionButton("Prev_Tab2",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-left fa-2x"></i></div>
+                                                                  ')))
+    Next_Button2=div(actionButton("Next_Tab2",HTML('<div class="col-sm-4"><i class="fa fa-angle-double-right fa-2x"></i></div>')))
+    
     output$example1_question = renderUI({
         tags$iframe(width="100%", height="40", src='pic13.png')
     })
@@ -454,6 +516,31 @@ shinyServer(function(input, output, session){
     output$html4 = renderUI({
         tags$iframe(width="100%", height="600", src='08151.html',seamless=TRUE)
     })
+    output$Next_Previous2=renderUI({
+        tab_list2=input$List_of_tab2[-length(input$List_of_tab2)]
+        nb_tab2=length(tab_list2)
+        if (which(tab_list2==input$tabBox_next_previous2)==nb_tab2)
+            column(1,offset=1,Previous_Button2)
+        else if (which(tab_list2==input$tabBox_next_previous2)==1)
+            column(1,offset = 10,Next_Button2)
+        else
+            div(column(1,offset=1,Previous_Button2),column(1,offset=8,Next_Button2))
+        
+    })
+    observeEvent(input$Prev_Tab2,
+                 {
+                     tab_list2=input$List_of_tab2
+                     current_tab2=which(tab_list2==input$tabBox_next_previous2)
+                     updateTabsetPanel(session,"tabBox_next_previous2",selected=tab_list2[current_tab2-1])
+                 }
+    )
+    observeEvent(input$Next_Tab2,
+                 {
+                     tab_list2=input$List_of_tab2
+                     current_tab2=which(tab_list2==input$tabBox_next_previous2)
+                     updateTabsetPanel(session,"tabBox_next_previous2",selected=tab_list2[current_tab2+1])
+                 }
+    )
     
     #p4-5
     output$htmln2 = renderUI({

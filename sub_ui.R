@@ -163,7 +163,8 @@ p3_2_ui = fluidPage(
 p4_4_ui = fluidPage(
   box(
     width = 12,
-    title = 'Example 1',
+    tabBox(width=12,id="tabBox_next_previous2",
+           tabPanel('Example1',
     uiOutput("example1_question"),
     
     fluidRow(
@@ -177,7 +178,7 @@ p4_4_ui = fluidPage(
         plotOutput("Qplot")
       )
     )),
-  
+    tabPanel('Example1-1',
   fluidRow(
     column(
       width = 6,
@@ -205,62 +206,90 @@ p4_4_ui = fluidPage(
         width = 200,
         height = 150,
         uiOutput("accelerationFun"),
-        plotOutput("Aplot")
+        plotOutput("Aplot"))
       )
     )),
-  uiOutput('html4')
-)
+  uiOutput('html4'),
+  tags$script("
+                       $('body').mouseover(function() {
+                       list_tabs2=[];
+                       $('#tabBox_next_previous2 li a').each(function(){
+                       list_tabs2.push($(this).html())
+                       });
+                       Shiny.onInputChange('List_of_tab2', list_tabs2);})
+                       "
+  )),
+  uiOutput("Next_Previous2")
+))
 
 p4_2_ui=fluidPage(
-  fluidRow(
-    box(title = 'Example1',
-        width = 7,
-        uiOutput('ex40201'),
-        br(),
-        fluidRow(
-          column(
-            width = 6,
-            box(
-              width = 200,
-              actionButton('ex40201_1set','Solution'),
-              verbatimTextOutput('good01'),
-              plotOutput('goodplot01')
-            )
-          ),
-          column(
-            width = 6,
-            box(
-              width = 200,
-              actionButton('ex40201_2set','Solution'),
-              verbatimTextOutput('good02'),
-              plotOutput('goodplot02')
-            )
-          )
-        )),
-    box(
-      width = 5,
-      height = 660,
-      htmlOutput('html402'))
-  ),
-  fluidRow(
-    box(title = 'Example2',
-        width = 7,
-        uiOutput('ex40202'),
-        br(),
-        actionButton('ex40202_1set','Solution'),
-        br(),
-        uiOutput('good03')),
-    box(
-      width = 5,
-      height = 650,
-      htmlOutput('html403')
-    )))
+                  box(width=12,
+                                    tabBox(width=12,id="tabBox_next_previous",
+                                            tabPanel('Example1',
+                                                        fluidRow(
+                                                          box(
+                                                              width = 7,
+                                                              uiOutput('ex40201'),
+                                                              br(),
+                                                              fluidRow(
+                                                                column(
+                                                                  width = 6,
+                                                                  box(
+                                                                    width = 200,
+                                                                    actionButton('ex40201_1set','Solution'),
+                                                                    verbatimTextOutput('good01'),
+                                                                    plotOutput('goodplot01')
+                                                                  )
+                                                                ),
+                                                                column(
+                                                                  width = 6,
+                                                                  box(
+                                                                    width = 200,
+                                                                    actionButton('ex40201_2set','Solution'),
+                                                                    verbatimTextOutput('good02'),
+                                                                    plotOutput('goodplot02')
+                                                                  )
+                                                                )
+                                                              )),
+                                                          box(
+                                                            width = 5,
+                                                            height = 660,
+                                                            htmlOutput('html402'))
+                                                        )),
+                                               tabPanel('Example2',fluidRow(
+                                                 box(
+                                                     width = 7,
+                                                     uiOutput('ex40202'),
+                                                     br(),
+                                                     actionButton('ex40202_1set','Solution'),
+                                                     br(),
+                                                     uiOutput('good03')),
+                                                 box(
+                                                   width = 5,
+                                                   height = 650,
+                                                   htmlOutput('html403')
+                                                 ))),
+                                               tags$script("
+                       $('body').mouseover(function() {
+                       list_tabs=[];
+                       $('#tabBox_next_previous li a').each(function(){
+                       list_tabs.push($(this).html())
+                       });
+                       Shiny.onInputChange('List_of_tab', list_tabs);})
+                       "
+                                               )
+                                        ),
+                                        uiOutput("Next_Previous")
+                      )
+)
 
 p4_3_ui = fluidPage(
+  box(width=12,
+      tabBox(width=12,id="tabBox_next_previous1",
+             tabPanel('Example1',
   fluidRow(
     box(
       width = 12,
-      title = 'Example 1',
       uiOutput("peggy_question1"),
     )
   ),
@@ -274,7 +303,8 @@ p4_3_ui = fluidPage(
       br(),
       plotOutput("peggy_plot1")
     )
-  ),
+  )),
+  tabPanel('Example1-1',
   fluidRow(
     column(
       width = 6,
@@ -328,11 +358,11 @@ p4_3_ui = fluidPage(
         htmlOutput("peggy_html13")
       )
     )
-  ),
+  )),
+  tabPanel('Example2',
   fluidRow(
     box(
       width = 12,
-      title = 'Example 2',
       uiOutput("peggy_question2"),
     )
   ),
@@ -346,7 +376,8 @@ p4_3_ui = fluidPage(
       br(),
       plotOutput("peggy_plot2")
     )
-  ),
+  )),
+  tabPanel('Example2-1',
   fluidRow(
     column(
       width = 6,
@@ -382,9 +413,18 @@ p4_3_ui = fluidPage(
         htmlOutput("peggy_html22")
       )
     )
-  )
-)
-
+  )),
+  tags$script("
+                       $('body').mouseover(function() {
+                       list_tabs1=[];
+                       $('#tabBox_next_previous1 li a').each(function(){
+                       list_tabs1.push($(this).html())
+                       });
+                       Shiny.onInputChange('List_of_tab1', list_tabs1);})
+                       "
+  )),
+  uiOutput("Next_Previous1")
+))
 p4_5_ui <- fluidPage(
   fluidRow(
     box(
@@ -426,6 +466,7 @@ p4_5_ui <- fluidPage(
       width = 6,
       box(
         width = 200,
+        title = 'Example 2',
         verbatimTextOutput("quiz2"),
         actionButton("setn2","Solution")
       ),
@@ -447,7 +488,6 @@ p4_5_ui <- fluidPage(
         htmlOutput("htmln2")))
   )
 )
-
 
 p4_6_ui = fluidPage(
   fluidRow(
